@@ -6,7 +6,7 @@
   "license": "MIT",
   "packageManager": "yarn@3.4.1",
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next dev",
+    "dev": "SET NODE_OPTIONS=--inspect && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
