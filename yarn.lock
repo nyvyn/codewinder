@@ -721,9 +721,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/supabase-js@npm:^2.21.0":
-  version: 2.23.0
-  resolution: "@supabase/supabase-js@npm:2.23.0"
+"@supabase/supabase-js@npm:^2.24.0":
+  version: 2.24.0
+  resolution: "@supabase/supabase-js@npm:2.24.0"
   dependencies:
     "@supabase/functions-js": ^2.1.0
     "@supabase/gotrue-js": ^2.26.0
@@ -731,7 +731,7 @@ __metadata:
     "@supabase/realtime-js": ^2.7.2
     "@supabase/storage-js": ^2.5.1
     cross-fetch: ^3.1.5
-  checksum: 36c911121bcbf1162a8d7868f064c5483e80afaf0c5eb930e2e16bf595cf572f5bdb1dc03deee13b66f512e35601daeb8117f4ac91ce759728d8a810b5045c2b
+  checksum: 9a69685a4ad3b73781cd3607c03e4362649e06d02e8fa815a5fb76a8dfdcc1484ad152b6ed0f73b6c4c15a9ba36e521796c4af28b7de494ab16c588b3cbc0c35
   languageName: node
   linkType: hard
 
@@ -1556,7 +1556,7 @@ __metadata:
     "@mui/material": ^5.11.10
     "@next/font": 13.1.6
     "@playwright/test": ^1.33.0
-    "@supabase/supabase-js": ^2.21.0
+    "@supabase/supabase-js": ^2.24.0
     "@types/cheerio": ^0.22.31
     "@types/node": 18.13.0
     "@types/pdf-parse": ^1.1.1

@@ -20,7 +20,7 @@
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.11.10",
     "@next/font": "13.1.6",
-    "@supabase/supabase-js": "^2.21.0",
+    "@supabase/supabase-js": "^2.24.0",
     "@types/cheerio": "^0.22.31",
     "@types/pdf-parse": "^1.1.1",
     "cheerio": "^1.0.0-rc.12",
