@@ -1544,7 +1544,7 @@ __metadata:
     eslint-config-next: 13.4.4
     eslint-config-prettier: ^8.8.0
     hnswlib-node: ^1.4.2
-    langchain: ^0.0.84
+    langchain: ^0.0.91
     next: 13.4.4
     openai: ^3.1.0
     pdf-parse: ^1.1.1
@@ -3571,9 +3571,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"langchain@npm:^0.0.84":
-  version: 0.0.84
-  resolution: "langchain@npm:0.0.84"
+"langchain@npm:^0.0.91":
+  version: 0.0.91
+  resolution: "langchain@npm:0.0.91"
   dependencies:
     "@anthropic-ai/sdk": ^0.4.3
     ansi-styles: ^5.0.0
@@ -3598,10 +3598,13 @@ __metadata:
     "@aws-sdk/client-sagemaker-runtime": ^3.310.0
     "@clickhouse/client": ^0.0.14
     "@getmetal/metal-sdk": "*"
+    "@getzep/zep-js": ^0.3.1
+    "@gomomento/sdk": ^1.23.0
     "@huggingface/inference": ^1.5.1
     "@opensearch-project/opensearch": "*"
     "@pinecone-database/pinecone": "*"
     "@qdrant/js-client-rest": ^1.2.0
+    "@supabase/postgrest-js": ^1.1.1
     "@supabase/supabase-js": ^2.10.0
     "@tensorflow-models/universal-sentence-encoder": "*"
     "@tensorflow/tfjs-converter": "*"
@@ -3612,7 +3615,7 @@ __metadata:
     apify-client: ^2.7.1
     axios: "*"
     cheerio: ^1.0.0-rc.12
-    chromadb: ^1.4.2
+    chromadb: ^1.5.2
     cohere-ai: ^5.0.2
     d3-dsv: ^2.0.0
     epub2: ^3.0.1
@@ -3622,9 +3625,11 @@ __metadata:
     html-to-text: ^9.0.5
     ignore: ^5.2.0
     mammoth: "*"
-    meriyah: "*"
     mongodb: ^5.2.0
+    mysql2: ^3.3.3
     pdf-parse: 1.1.1
+    peggy: ^3.0.2
+    pg: ^8.11.0
     pickleparser: ^0.1.0
     playwright: ^1.32.1
     puppeteer: ^19.7.2
@@ -3646,6 +3651,10 @@ __metadata:
       optional: true
     "@getmetal/metal-sdk":
       optional: true
+    "@getzep/zep-js":
+      optional: true
+    "@gomomento/sdk":
+      optional: true
     "@huggingface/inference":
       optional: true
     "@opensearch-project/opensearch":
@@ -3653,6 +3662,8 @@ __metadata:
     "@pinecone-database/pinecone":
       optional: true
     "@qdrant/js-client-rest":
+      optional: true
+    "@supabase/postgrest-js":
       optional: true
     "@supabase/supabase-js":
       optional: true
@@ -3694,11 +3705,15 @@ __metadata:
       optional: true
     mammoth:
       optional: true
-    meriyah:
-      optional: true
     mongodb:
       optional: true
+    mysql2:
+      optional: true
     pdf-parse:
+      optional: true
+    peggy:
+      optional: true
+    pg:
       optional: true
     pickleparser:
       optional: true
@@ -3716,7 +3731,7 @@ __metadata:
       optional: true
     weaviate-ts-client:
       optional: true
-  checksum: 61b32fbe38de1130c7d3038ff17b87e6d19b7d9ce007daed9d1d8327dc71f658840fd6ae0f58ff813ff8554e16e33bdaae2ad7fcdda6733be4eb34d7d256d91e
+  checksum: 6052570754a1dea7ff66a572e19886a94fe795c32e78a44518e7a9451df85091966369af31cf458cc61cdd3f0ddbfbe6a343a32d1774be20e96d84b821541f17
   languageName: node
   linkType: hard
 
