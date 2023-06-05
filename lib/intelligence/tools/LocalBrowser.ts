@@ -9,7 +9,7 @@ import {
     HumanMessagePromptTemplate,
     SystemMessagePromptTemplate
 } from "langchain/prompts";
-import { LLMChain } from "langchain/chains";
+import { GuardChain } from "@/lib/intelligence/chains/GuardChain";
 
 const AsyncFunction = async function () {
 }.constructor;
@@ -178,16 +178,16 @@ Note: if you are already on the correct page, you do not need to go to it again.
             SystemMessagePromptTemplate.fromTemplate(system),
             HumanMessagePromptTemplate.fromTemplate(task)
         ];
-        const llmChain = new LLMChain({
+        const llmChain = new GuardChain({
             prompt: ChatPromptTemplate.fromPromptMessages(messages),
             llm: model
         });
-        const completion = await llmChain.call({})
+        const completion = await llmChain.predict({})
         console.log('Commands to be executed');
 
         try {
             const codeRegex = /```(.*)(\r\n|\r|\n)(?<code>[\w\W\n]+)(\r\n|\r|\n)```/;
-            code = completion.text.match(codeRegex).groups.code.trim();
+            code = completion.match(codeRegex).groups.code.trim();
 
             console.log(code);
         } catch (e) {

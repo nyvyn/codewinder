@@ -57,16 +57,15 @@ export class Director extends GuardChain {
         });
     }
 
-    async evaluate({context, memory, objective}: {
+    async predict({context, memory, objective}: {
         context: string;
         memory: string;
         objective: string
     }): Promise<string> {
-        const completion = await this.call({
+        return await super.predict({
             context,
             memory,
             objective
         });
-        return completion.text;
     }
 }

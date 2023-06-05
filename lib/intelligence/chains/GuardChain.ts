@@ -26,6 +26,11 @@ export const getModelNameForTiktoken = (modelName: string): TiktokenModel => {
 export class GuardChain extends LLMChain {
 
     private readonly modelName: string;
+    public outputKey: string = "output";
+
+    get outputKeys() {
+        return [this.outputKey];
+    }
 
     constructor(inputs: LLMChainInput) {
         super(inputs);
@@ -42,7 +47,7 @@ export class GuardChain extends LLMChain {
         });
 
         if (remainingTokens < 0) {
-            return {"text": "Your input exceeds the maximum number of tokens for this model."}
+            return {[this.outputKey]: "Your input exceeds the maximum number of tokens for this model."}
         } else {
             return super.call(values, callbacks);
         }

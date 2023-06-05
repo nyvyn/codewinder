@@ -6,6 +6,7 @@ import { LLMChain } from "langchain";
 import { PromptTemplate } from "langchain/prompts";
 import * as vm from "node:vm";
 import { MemoryStore } from "@/lib/intelligence/memory/MemoryStore";
+import { GuardChain } from "@/lib/intelligence/chains/GuardChain";
 
 export const NAME = "javascript-evaluator";
 export const DESCRIPTION = `an AI-powered JavaScript evaluator.
@@ -77,7 +78,7 @@ export class JavascriptEvaluator extends Tool {
 
         const prompt = PromptTemplate.fromTemplate(GUIDANCE);
 
-        this.llmChain = new LLMChain({
+        this.llmChain = new GuardChain({
             llm: model,
             callbacks: callbacks,
             prompt
@@ -93,11 +94,10 @@ export class JavascriptEvaluator extends Tool {
         const example = memory && memory.length > 0 ? memory[0].pageContent : "";
 
         // Generate JavaScript code from the natural language description.
-        const response = await this.llmChain.call({ specification, example });
-        const output = response.text;
+        const completion = await this.llmChain.predict({ specification, example });
 
         const regex = /(?<=```javascript)[\s\S]*?(?=\n```)/;
-        const matches = output.match(regex);
+        const matches = completion.match(regex);
         const match = matches.pop();
 
         try {

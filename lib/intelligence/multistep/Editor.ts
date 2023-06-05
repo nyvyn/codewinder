@@ -40,11 +40,10 @@ export class Editor extends GuardChain {
         });
     }
 
-    async evaluate({context, objective}: { context: string; objective: string }): Promise<string> {
-        const completion = await this.call({
+    async predict({context, objective}: { context: string; objective: string }): Promise<string> {
+        return await super.predict({
             context,
             objective
         });
-        return completion.text;
     }
 }

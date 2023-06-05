@@ -9,6 +9,7 @@ import { ReActAgent } from "@/lib/intelligence/react/ReActAgent";
 import { BaseLanguageModel } from "langchain/base_language";
 import { MultistepExecutor } from "@/lib/intelligence/multistep/MultistepExecutor";
 import { MemoryStore } from "@/lib/intelligence/memory/MemoryStore";
+import { Callbacks } from "langchain/dist/callbacks/manager";
 
 const MAX_ITERATIONS = 6; // Minimum should be two, once to try an action, and the second to assert a final response.
 const MAX_DEPTH = 1;
@@ -149,14 +150,14 @@ export class ReActExecutor extends BaseChain {
             if (newActions.length > 1) {
                 // Only use the multistep executor if we're not at the maximum depth.
                 if (this.depth < MAX_DEPTH) {
-                    const multiOutput = await this.multistep.call({
+                    const completion = await this.multistep.predict({
                         ...newInputs,
                         actions: newActions.map(action => action.toolInput).join(",\n"),
                     }, runManager?.getChild());
 
                     // Direct return multistep output
                     return getOutput({
-                        returnValues: {[this.agent.returnValues[0]]: multiOutput},
+                        returnValues: {[this.agent.returnValues[0]]: completion},
                         log: "",
                     });
                 } else {
@@ -209,7 +210,6 @@ export class ReActExecutor extends BaseChain {
         return "agent_executor" as const;
     }
 
-
     /** Create from agent and a list of tools. */
     static makeExecutor({
         creative,
@@ -240,6 +240,11 @@ export class ReActExecutor extends BaseChain {
             returnIntermediateSteps,
             tools
         });
+    }
+
+    async predict(values: ChainValues, callbacks?: Callbacks): Promise<string> {
+        const completion = await this.call(values, callbacks);
+        return completion[this.agent.returnValues[0]];
     }
 
     serialize(): SerializedLLMChain {

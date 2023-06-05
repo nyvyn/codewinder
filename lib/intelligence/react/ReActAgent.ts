@@ -77,10 +77,6 @@ export class ReActAgent extends BaseMultiActionAgent {
         return [`${OBSERVATION}:`, `${FINAL_RESPONSE}:`];
     }
 
-    get returnValues() {
-        return [CONTEXT_INPUT, OBJECTIVE_INPUT, SCRATCHPAD_INPUT, TOOLING_INPUT];
-    }
-
     constructor({creativeChain, llmChain, memory, tools, maxIterations}: ReActAgentInput) {
         super();
 
@@ -152,7 +148,7 @@ export class ReActAgent extends BaseMultiActionAgent {
             const memory = await this.constructMemories(steps);
 
             const direction = Director.makeChain({model: this.creativeChain.llm, callbacks: callbackManager});
-            const completion = await direction.evaluate({
+            const completion = await direction.predict({
                 context: inputs[CONTEXT_INPUT],
                 objective: inputs[OBJECTIVE_INPUT],
                 memory: memory,
@@ -175,7 +171,7 @@ export class ReActAgent extends BaseMultiActionAgent {
     ): Promise<AgentAction[] | AgentFinish> {
         const critic = ActionEvaluator.makeChain({model: this.creativeChain.llm, callbacks: callbackManager});
         const scratchpad = await this.constructScratchPad(steps);
-        const evaluation = await critic.evaluate({
+        const evaluation = await critic.predict({
             objective: inputs[OBJECTIVE_INPUT],
             response: JSON.stringify(actions),
             scratchpad,
@@ -274,7 +270,7 @@ export class ReActAgent extends BaseMultiActionAgent {
                 return `${step.action.tool} - ${step.action.toolInput}`
             }).join("\n");
 
-            const memory = await condenser.evaluate({
+            const memory = await condenser.predict({
                 response: _returnValues.output,
                 actions: JSON.stringify(actions),
             });

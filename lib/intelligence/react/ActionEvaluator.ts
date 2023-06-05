@@ -70,15 +70,14 @@ export class ActionEvaluator extends GuardChain {
         });
     }
 
-    async evaluate({objective, response, scratchpad, tools}: {
+    async predict({objective, response, scratchpad, tools}: {
         objective: string; response: string; scratchpad: string; tools: string
     }): Promise<string> {
-        const completion = await this.call({
+        return await super.predict({
             objective,
             response,
             scratchpad,
             tools
         });
-        return completion.text;
     }
 }

@@ -44,11 +44,10 @@ export class MemoryCondenser extends GuardChain {
         });
     }
 
-    async evaluate({actions, response}: { actions: string; response: string; }): Promise<string> {
-        const completion = await this.call({
+    async predict({actions, response}: { actions: string; response: string; }): Promise<string> {
+        return await super.predict({
             actions,
             response
         });
-        return completion.text;
     }
 }

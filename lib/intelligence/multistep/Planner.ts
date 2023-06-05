@@ -51,11 +51,10 @@ export class Planner extends GuardChain {
         });
     }
 
-    async evaluate({objective, steps}: { objective: string, steps: string }): Promise<string> {
-        const completion = await this.call({
+    async predict({objective, steps}: { objective: string, steps: string }): Promise<string> {
+        return await super.predict({
             objective,
             steps
         });
-        return completion.text;
     }
 }

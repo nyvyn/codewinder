@@ -64,9 +64,9 @@ const Service: NextApiHandler = async (req, res) => {
         inputs[OBJECTIVE_INPUT] = objective;
         inputs[CONTEXT_INPUT] = JSON.stringify(context);
 
-        const response = await chain.call(inputs);
+        const completion = await chain.predict(inputs);
         sendClear();
-        sendLine(response.output);
+        sendLine(completion);
     } catch (error) {
         sendClear();
         sendError(error)

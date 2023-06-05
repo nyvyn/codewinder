@@ -8,6 +8,7 @@ import { MemoryStore } from "@/lib/intelligence/memory/MemoryStore";
 import { BaseChain, SerializedLLMChain } from "langchain/chains";
 import { ChainValues } from "langchain/schema";
 import { CallbackManagerForChainRun } from "langchain/callbacks";
+import { Callbacks } from "langchain/dist/callbacks/manager";
 
 export const ACTIONS_INPUT = "actions";
 export const OUTPUT_KEY = "output";
@@ -49,6 +50,29 @@ export class MultistepExecutor extends BaseChain {
         return [OUTPUT_KEY];
     }
 
+    async _call(
+        inputs: ChainValues,
+        runManager?: CallbackManagerForChainRun
+    ): Promise<ChainValues> {
+        const completion = await MultistepExecutor.runAgent({
+            creative: this.creative,
+            depth: this.depth,
+            inputs: inputs,
+            maxIterations: this.maxIterations,
+            memory: this.store,
+            model: this.model,
+            runManager: runManager,
+            tools: this.tools
+        });
+        return {
+            [OUTPUT_KEY]: completion
+        }
+    }
+
+    _chainType() {
+        return "multistep_executor" as const;
+    }
+
     static async runAgent({runManager, creative, depth, inputs, model, maxIterations, memory, tools}: {
         creative: BaseLanguageModel,
         depth: number,
@@ -70,7 +94,7 @@ export class MultistepExecutor extends BaseChain {
         });
 
         const planner = Planner.makeChain({model: creative, callbacks: runManager?.getChild()});
-        const interim = await planner.evaluate({
+        const interim = await planner.predict({
             objective: inputs[OBJECTIVE_INPUT],
             steps: inputs[ACTIONS_INPUT]
         });
@@ -85,38 +109,20 @@ export class MultistepExecutor extends BaseChain {
             inputs[OBJECTIVE_INPUT] = `${objective}: ${step}`
             if (results.length > 0) inputs[CONTEXT_INPUT] = results[results.length - 1]
 
-            const completion = await executor.call(inputs);
-            results.push(completion.output);
+            const completion = await executor.predict(inputs);
+            results.push(completion);
         }
 
         const editor = Editor.makeChain({model: creative, callbacks: runManager?.getChild()});
-        return await editor.evaluate({
+        return await editor.predict({
             context: results.join("\n\n"),
             objective
         });
     }
 
-    async _call(
-        inputs: ChainValues,
-        runManager?: CallbackManagerForChainRun
-    ): Promise<ChainValues> {
-        const output = await MultistepExecutor.runAgent({
-            creative: this.creative,
-            depth: this.depth,
-            inputs: inputs,
-            maxIterations: this.maxIterations,
-            memory: this.store,
-            model: this.model,
-            runManager: runManager,
-            tools: this.tools
-        });
-        return {
-            output: output
-        }
-    }
-
-    _chainType() {
-        return "multistep_executor" as const;
+    async predict(values: ChainValues, callbacks?: Callbacks): Promise<string> {
+        const completion = await this.call(values, callbacks);
+        return completion[OUTPUT_KEY];
     }
 
     serialize(): SerializedLLMChain {
