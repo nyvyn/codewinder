@@ -24,7 +24,7 @@
     "@types/pdf-parse": "^1.1.1",
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.0.3",
-    "eslint": "8.34.0",
+    "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",
     "hnswlib-node": "^1.4.2",
     "langchain": "^0.0.84",
