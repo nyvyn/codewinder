@@ -794,17 +794,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
+"@types/node@npm:*, @types/node@npm:20.2.5":
   version: 20.2.5
   resolution: "@types/node@npm:20.2.5"
   checksum: 38ce7c7e9d76880dc632f71d71e0d5914fcda9d5e9a7095d6c339abda55ca4affb0f2a882aeb29398f8e09d2c5151f0b6586c81c8ccdfe529c34b1ea3337425e
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:18.13.0":
-  version: 18.13.0
-  resolution: "@types/node@npm:18.13.0"
-  checksum: 4ea10f8802848b01672bce938f678b6774ca2cee0c9774f12275ab064ae07818419c3e2e41d6257ce7ba846d1ea26c63214aa1dfa4166fa3746291752b8c6416
   languageName: node
   linkType: hard
 
@@ -1531,7 +1524,7 @@ __metadata:
     "@playwright/test": ^1.33.0
     "@supabase/supabase-js": ^2.24.0
     "@types/cheerio": ^0.22.31
-    "@types/node": 18.13.0
+    "@types/node": 20.2.5
     "@types/pdf-parse": ^1.1.1
     "@types/react": 18.0.28
     "@types/react-dom": 18.2.4
