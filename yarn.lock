@@ -1562,7 +1562,7 @@ __metadata:
     eslint-config-next: 13.4.4
     eslint-config-prettier: ^8.8.0
     hnswlib-node: ^1.4.2
-    langchain: ^0.0.91
+    langchain: ^0.0.92
     next: 13.4.4
     openai: ^3.1.0
     pdf-parse: ^1.1.1
@@ -3564,9 +3564,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"langchain@npm:^0.0.91":
-  version: 0.0.91
-  resolution: "langchain@npm:0.0.91"
+"langchain@npm:^0.0.92":
+  version: 0.0.92
+  resolution: "langchain@npm:0.0.92"
   dependencies:
     "@anthropic-ai/sdk": ^0.4.3
     ansi-styles: ^5.0.0
@@ -3612,7 +3612,7 @@ __metadata:
     cohere-ai: ^5.0.2
     d3-dsv: ^2.0.0
     epub2: ^3.0.1
-    faiss-node: ^0.2.0
+    faiss-node: ^0.2.1
     google-auth-library: ^8.8.0
     hnswlib-node: ^1.4.2
     html-to-text: ^9.0.5
@@ -3724,7 +3724,7 @@ __metadata:
       optional: true
     weaviate-ts-client:
       optional: true
-  checksum: 6052570754a1dea7ff66a572e19886a94fe795c32e78a44518e7a9451df85091966369af31cf458cc61cdd3f0ddbfbe6a343a32d1774be20e96d84b821541f17
+  checksum: a9fb6cdf48e971f9327bcf5eb2322eb9b9add63413ecacd90bb064feab40d3ba6024086ccade59c0285dd57249406dda9ba7847cdb02e08312e147618165b49e
   languageName: node
   linkType: hard
 
