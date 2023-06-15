@@ -117,7 +117,7 @@ export class CodeExecutor extends Tool {
         const vmEnvironmentKeys = Object.keys(vmEnvironmentVariables).join(", ");
 
         // Retrieve a similar example from memory.
-        const memory = await this.memory.retrieve(specification, 0.80);
+        const memory = await this.memory.retrieve(specification, 1);
         const example = memory && memory.length > 0 ? memory[0].pageContent : "No example found.";
 
         // Generate JavaScript code from the natural language description.

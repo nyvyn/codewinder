@@ -6,8 +6,8 @@ import { GuardChain } from "@/lib/intelligence/chains/GuardChain";
 
 export const EVALUATION = "Evaluation";
 export const OBJECTIVE_INPUT = "objective";
-export const RESPONSE_INPUT = "response";
-export const SCRATCHPAD_INPUT = "scratchpad";
+export const ACTIONS_INPUT = "actions";
+export const STEPS_INPUT = "steps";
 export const SCORE = "Score";
 export const TOOL_INPUT = "tools";
 
@@ -17,13 +17,19 @@ An AI assistant is helping a user achieve this specific objective:
 
 The AI assistant was asked to use one or more tools to achieve this objective.
 These are the allowed tools: 
+\"\"\"
 {${TOOL_INPUT}}
+\"\"\"
 
-Here is the history of past actions and experiences: 
-\"\"\"{${SCRATCHPAD_INPUT}}\"\"\"
+Here is the history of past actions: 
+\`\`\`
+{${STEPS_INPUT}}
+\`\`\`
 
-Based on these past actions and experiences, the AI has now responded with: 
-\"\"\"{${RESPONSE_INPUT}}\"\"\"
+Based on these past actions, the AI has now responded with: 
+\`\`\`
+{${ACTIONS_INPUT}}
+\`\`\`
 
 Evaluate the response based on the following criteria:
 * Does the response meet the stated objective based on the past actions and experiences?
@@ -69,13 +75,13 @@ export class ActionEvaluator extends GuardChain {
         });
     }
 
-    async predict({objective, response, scratchpad, tools}: {
-        objective: string; response: string; scratchpad: string; tools: string
+    async predict({objective, actions, steps, tools}: {
+        objective: string; actions: string; steps: string; tools: string
     }): Promise<string> {
         return await super.predict({
             objective,
-            response,
-            scratchpad,
+            actions,
+            steps,
             tools
         });
     }

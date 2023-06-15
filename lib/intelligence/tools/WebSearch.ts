@@ -6,7 +6,7 @@ import { MemoryStore } from "@/lib/intelligence/memory/MemoryStore";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { Embeddings } from "langchain/embeddings";
 
-export const NAME = "web-search";
+export const NAME = "search";
 export const DESCRIPTION = `find answers on the internet and knowledge stores. 
 Input format:
 {{
@@ -76,7 +76,7 @@ export class WebSearch extends Tool {
 
         if (this.memory) {
             const memories = await this.memory.retrieveSnippets(input, 0.75, 4);
-            for (const memory in memories) {
+            if (memories && memories.length > 0) {  // Check if memories is not null and has at least one element
                 const memory = memories[0];
                 links.push(`[${memory.metadata.name}](${memory.metadata.url}) - ${memory.pageContent}`);
             }

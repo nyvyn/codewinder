@@ -18,7 +18,7 @@ const MessageList = ({ chatMessages, loading }: MessageListProps) => {
         const messageList = messageListRef.current;
         if (messageList) {
             const handleScroll = () => {
-                const atBottom = messageList.scrollTop + messageList.offsetHeight >= messageList.scrollHeight;
+                const atBottom = messageList.scrollTop + messageList.offsetHeight >= messageList.scrollHeight - 150; // from bottom
                 hasUserScrolledUp.current = !atBottom;
             };
             messageList.addEventListener('scroll', handleScroll);
