@@ -43,7 +43,7 @@ export const makeChain = async ({callbacks}: { callbacks: Callbacks }): Promise<
     // This should represent intelligence that is great at determiing the best tool to use.
     const predictable = new ChatOpenAI({
         openAIApiKey: openAiApiKey,
-        modelName: "gpt-4",
+        modelName: "gpt-3.5-turbo",
         temperature: 0,
         topP: 0,
         streaming: Boolean(callbacks),

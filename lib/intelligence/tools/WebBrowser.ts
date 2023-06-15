@@ -133,7 +133,7 @@ const DEFAULT_HEADERS = {
 
 type Headers = Record<string, any>;
 
-export const NAME = "web-browser";
+export const NAME = "browser";
 export const DESCRIPTION = `finding or summarizing webpage or PDF content from a provided url.
 Never make up a link, only use a valid url returned as a result of a previous web search.
 Input should be "ONE valid http URL including protocol","what to find on the page".
@@ -231,7 +231,7 @@ export class WebBrowser extends Tool {
                 [],
                 this.embeddings
             );
-            const similar = await vectorStore.similaritySearch(task, 8);
+            const similar = await vectorStore.similaritySearch(task, 6);
             context = similar.map((res) => res.pageContent).join("\n");
         }
 

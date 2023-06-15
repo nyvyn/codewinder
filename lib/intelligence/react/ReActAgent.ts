@@ -9,7 +9,8 @@ import {
     OBSERVATION,
     SYSTEM,
     THOUGHT,
-    TOOLING
+    TOOLING,
+    TOOLING_INPUT
 } from "@/lib/intelligence/react/prompts";
 import {ChatCreatePromptArgs} from "langchain/agents";
 import {Tool} from "langchain/tools";
@@ -31,7 +32,6 @@ import { calculateRemainingTokens } from "@/lib/util/tokens";
 export const CONTEXT_INPUT = "context";
 export const OBJECTIVE_INPUT = "objective";
 export const SCRATCHPAD_INPUT = "scratchpad";
-export const TOOLING_INPUT = "tools";
 
 interface ReActChatArgs extends ChatCreatePromptArgs {
     chat: boolean;
@@ -123,7 +123,6 @@ export class ReActAgent extends BaseMultiActionAgent {
         const system = [
             prefix,
             TOOLING,
-            `Allowed tools:\n{${TOOLING_INPUT}}`,
             FORMAT_INSTRUCTIONS,
             suffix
         ].join("\n");
@@ -168,12 +167,14 @@ export class ReActAgent extends BaseMultiActionAgent {
         inputs: ChainValues,
         callbackManager?: CallbackManager
     ): Promise<AgentAction[] | AgentFinish> {
-        const critic = ActionEvaluator.makeChain({model: this.creativeChain.llm, callbacks: callbackManager});
-        const scratchpad = await this.constructScratchPad(steps);
+        const critic = ActionEvaluator.makeChain({model: this.llmChain.llm, callbacks: callbackManager});
+        const formattedSteps = steps.map(step => `{"action": "${step.action.tool}", "action_input": "${step.action.toolInput}"}`).join(",\n");
+        const formattedActions = actions.map(action => `{"action": "${action.tool}", "action_input": "${action.toolInput}"}`).join(",\n");
+
         const evaluation = await critic.predict({
             objective: inputs[OBJECTIVE_INPUT],
-            response: JSON.stringify(actions),
-            scratchpad,
+            actions: `[${formattedActions}]`,
+            steps: `[${formattedSteps}]`,
             tools: inputs[TOOLING_INPUT],
         });
         const newActions = await this.outputParser.parse(evaluation);
