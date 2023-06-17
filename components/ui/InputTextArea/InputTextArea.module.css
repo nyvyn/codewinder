@@ -38,7 +38,7 @@
     resize: none;
     font-size: 1rem;
     padding: 1rem 2rem 1rem 2rem;
-    width: 75vw;
+    width: 100%;
     border-radius: 0.5rem;
     border: 1px solid #30373d;
     background: #070809;
@@ -52,12 +52,4 @@
 
 .textarea::placeholder {
     color: #5f6368;
-}
-
-
-/* Mobile optimization */
-@media (max-width: 600px) {
-    .textarea {
-        width: 22rem;
-    }
 }

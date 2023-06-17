@@ -1,0 +1,28 @@
+.footer {
+    position: absolute;
+    bottom: 0;
+    color: #5f6368;
+    font-size: 0.8rem;
+    margin: 1.5rem;
+    width: 100%;
+    text-align: center;
+}
+
+.footer a {
+    font-weight: 500;
+    color: #7a7d81;
+}
+
+.footer a:hover {
+    opacity: 0.8;
+}
+
+/* Mobile optimization */
+@media (max-width: 600px) {
+
+    .footer {
+        font-size: 0.7rem;
+        width: 100%;
+        text-align: center;
+    }
+}

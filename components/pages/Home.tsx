@@ -1,10 +1,13 @@
-import Head from "next/head";
-import styles from "@/styles/Home.module.css";
-import Link from "next/link";
-import MessageList from "@/components/ui/MessageList";
+import Footer from "@/components/ui/Footer/Footer";
+import Header from "@/components/ui/Header/Header";
 import InputTextArea from "@/components/ui/InputTextArea";
-import { useEffect, useMemo, useRef, useState } from "react";
+import MessageList from "@/components/ui/MessageList";
+// import SettingsPanel from "@/components/ui/SettingsPanel";
 import { Message } from "@/lib/types/Message";
+import { Container } from "@mui/material";
+import Head from "next/head";
+import { useEffect, useMemo, useRef, useState } from "react";
+import styles from "./Home.module.css";
 
 const Home = () => {
     const [userInput, setUserInput] = useState("");
@@ -67,7 +70,7 @@ const Home = () => {
 
         setLoading(true);
         setUserInput("");
-        setMessageState(state => ({ ...state, pending: "" }));
+        setMessageState(state => ({...state, pending: ""}));
 
         const response = await fetch('/api/chat', {
             method: 'POST',
@@ -94,9 +97,9 @@ const Home = () => {
         let done = false;
 
         while (!done) {
-            const { value, done: doneReading } = await reader.read();
+            const {value, done: doneReading} = await reader.read();
             done = doneReading;
-            const data = decoder.decode(value, { stream: true });
+            const data = decoder.decode(value, {stream: true});
 
             // clear the textarea if the data contains {clear}
             if (data.trim().includes("{clear}")) {
@@ -130,7 +133,7 @@ const Home = () => {
     // Prevent blank submissions and allow for multiline input
     const handleEnter = (e: any) => {
         if (e.key === "Enter" && userInput) {
-            if(!e.shiftKey && userInput) {
+            if (!e.shiftKey && userInput) {
                 handleSubmit(e).then();
             }
         } else if (e.key === "Enter") {
@@ -139,53 +142,42 @@ const Home = () => {
     };
 
     const chatMessages: Message[] = useMemo(() => {
-        return [...messageState.messages, ...(messageState.pending ? [{ type: "apiMessage" as const, message: messageState.pending }] : [])];
+        return [...messageState.messages, ...(messageState.pending ? [{type: "apiMessage" as const, message: messageState.pending}] : [])];
     }, [messageState.messages, messageState.pending]);
 
     return (
         <>
             <Head>
                 <title>Codewinder</title>
-                <meta name="description" content="Your intelligent personal assistant" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
+                <meta name="description" content="Your intelligent personal assistant"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <link rel="icon" href="/favicon.ico"/>
             </Head>
-            <div className={styles.topnav}>
-                <div className = {styles.navlogo}>
-                    <Link href="/">Codewinder</Link>
-                </div>
-                <div className = {styles.navlinks}>
-                    <Link
-                        href="https://github.com/nyvyn/codewinder"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        GitHub
-                    </Link>
-                </div>
-            </div>
-            <main className={styles.main}>
-                <div className={styles.cloud}>
-                    <MessageList chatMessages={chatMessages} loading={loading} />
-                </div>
-                <div className={styles.center}>
-                    <div className={styles.cloudform}>
-                        <InputTextArea
-                            userInput={userInput}
-                            setUserInput={setUserInput}
-                            handleSubmit={handleSubmit}
-                            handleEnter={handleEnter}
-                            loading={loading}
-                        />
+            <Header/>
+            <Container maxWidth={false} disableGutters>
+                <main className={styles.main}>
+                    {/*<Hidden smDown>*/}
+                    {/*    <div className={styles.settingspanel}>*/}
+                    {/*        <SettingsPanel tools={[]} onChange={() => {}}/>*/}
+                    {/*    </div>*/}
+                    {/*</Hidden>*/}
+                    <div className={styles.centerpanel}>
+                        <div className={styles.chatmessages}>
+                            <MessageList chatMessages={chatMessages} loading={loading}/>
+                        </div>
+                        <div className={styles.textinput}>
+                            <InputTextArea
+                                userInput={userInput}
+                                setUserInput={setUserInput}
+                                handleSubmit={handleSubmit}
+                                handleEnter={handleEnter}
+                                loading={loading}
+                            />
+                        </div>
                     </div>
-                    <div className = {styles.footer}>
-                        <p>Powered by <a href="https://github.com/hwchase17/langchain" target="_blank" rel="noreferrer">
-                            LangChain
-                        </a>.
-                        </p>
-                    </div>
-                </div>
-            </main>
+                </main>
+            </Container>
+            <Footer/>
         </>
     );
 }

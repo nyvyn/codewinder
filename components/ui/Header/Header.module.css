@@ -1,0 +1,39 @@
+.topnav {
+    background-color: #141619;
+    border-bottom: 1px solid #30373d;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    align-items: center;
+}
+
+.navlogo, .navlinks a {
+    font-weight: 500;
+}
+
+.navlinks {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.navlogo {
+    font-size: 1rem;
+    margin-left: 1rem;
+}
+
+/* Mobile optimization */
+@media (max-width: 600px) {
+
+    .topnav {
+        border: 1px solid black;
+        align-items: center;
+        padding: 0.85rem 0.75rem 0.85rem 0.75rem;
+    }
+
+    .navlogo {
+        font-size: 1rem;
+        width: 20rem;
+    }
+}
