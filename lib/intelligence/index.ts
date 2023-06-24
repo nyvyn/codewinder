@@ -19,11 +19,13 @@ export const makeChain = async ({callbacks}: { callbacks: Callbacks }): Promise<
     const bingApiKey = process.env.BING_API_KEY;
     // const zapierApiKey = process.env.ZAPIER_NLA_API_KEY;
 
+    const power = "gpt-4-0613";
+    const speed = "gpt-3.5-turbo-16k-0613";
+
     // This should represent intelligence that is great at determiing the best tool to use.
     const predictable = new ChatOpenAI({
         openAIApiKey: openAiApiKey,
-        modelName: "gpt-4-0613",
-        temperature: 0,
+        modelName: power,
         topP: 0,
         streaming: Boolean(callbacks),
         callbacks,
@@ -33,8 +35,8 @@ export const makeChain = async ({callbacks}: { callbacks: Callbacks }): Promise<
     // This should represent intelligence that is great at parsing long texts.
     const capable = new ChatOpenAI({
         openAIApiKey: openAiApiKey,
-        modelName: "gpt-3.5-turbo-16k-0613",
-        temperature: 0.1,
+        modelName: speed,
+        temperature: 0,
         topP: 0,
         streaming: Boolean(callbacks),
         callbacks,
@@ -45,7 +47,7 @@ export const makeChain = async ({callbacks}: { callbacks: Callbacks }): Promise<
     // This should represent intelligence that is great at writing code.
     const powerful = new ChatOpenAI({
         openAIApiKey: openAiApiKey,
-        modelName: "gpt-4-0613",
+        modelName: power,
         temperature: 0.5,
         streaming: Boolean(callbacks),
         callbacks,
@@ -55,8 +57,8 @@ export const makeChain = async ({callbacks}: { callbacks: Callbacks }): Promise<
     // This should represent intelligence that is creative.
     const creative = new ChatOpenAI({
         openAIApiKey: openAiApiKey,
-        temperature: 0.7,
-        modelName: "gpt-3.5-turbo-16k-0613",
+        temperature: 0.8,
+        modelName: speed,
         streaming: Boolean(callbacks),
         callbacks,
         maxRetries: 2
@@ -104,27 +106,3 @@ export const makeChain = async ({callbacks}: { callbacks: Callbacks }): Promise<
         verbose: true,
     });
 }
-
-// const replicateApiKey = process.env.REPLICATE_API_KEY;
-//
-// const predictable = new Replicate({
-//     apiKey: replicateApiKey,
-//     model: "replicate/vicuna-13b:e6d469c2b11008bb0e446c3e9629232f9674581224536851272c54871f84076e",
-//     input: {
-//         temperature: 0.1,
-//         max_length: 4096,
-//     },
-//     callbacks
-// });
-
-// This is GPT4all with temp of 0
-// const predictable = new OpenAI({
-//     modelName: "wizardLM-7B.q4_2",
-//     temperature: 0,
-//     streaming: Boolean(callbacks),
-//     callbacks,
-//     maxRetries: 2,
-//     verbose: true,
-// }, {
-//     basePath: "http://127.0.0.1:4891/v1",
-// });
