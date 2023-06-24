@@ -23,7 +23,7 @@
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.0.3",
     "eslint": "8.42.0",
-    "eslint-config-next": "13.4.5",
+    "eslint-config-next": "13.4.7",
     "hnswlib-node": "^1.4.2",
     "js-tiktoken": "^1.0.7",
     "langchain": "^0.0.96",
