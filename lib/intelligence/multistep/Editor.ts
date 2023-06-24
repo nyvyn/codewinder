@@ -13,7 +13,7 @@ And using this as your guide:
 \"\"\"{${OBJECTIVE_INPUT}}\"\"\"
 
 Rewrite the provided text: you may add, remove, or change the content as needed.
-Use CommonMark to format your response including tables using Github Flavored Markdow (GFM) (but never footnotes).
+Use Github Flavored Markdown (GFM) to format the response (but never footnotes).
 The revised text should include inline sources from the provided text, but you should never make up a url or link.`;
 
 interface EditorInput {

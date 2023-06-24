@@ -237,9 +237,9 @@ export class WebBrowser extends StructuredTool {
             context = similar.map((res) => res.pageContent).join("\n");
         }
 
-        const prompt = `Text:${context}\n\nI need ${
-            doSummary ? "a summary" : task
-        } from the provided text. Limit to 150 words.`;
+        const prompt = `Text:${context}\n\nPlease ${
+            doSummary ? "summarize" : task
+        } the provided text. Limit to 150 words.`;
 
         const completion = await this.model.generatePrompt(
             [new StringPromptValue(prompt)],
