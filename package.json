@@ -37,7 +37,7 @@
     "next": "13.4.7",
     "openai": "^3.3.0",
     "pdf-parse": "^1.1.1",
-    "playwright": "^1.33.0",
+    "playwright": "^1.35.1",
     "prismjs": "^1.29.0",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
