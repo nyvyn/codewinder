@@ -26,7 +26,7 @@
     "bootstrap-icons": "^1.10.5",
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.0.3",
-    "eslint": "8.42.0",
+    "eslint": "8.44.0",
     "hnswlib-node": "^1.4.2",
     "js-cookie": "^3.0.5",
     "js-tiktoken": "^1.0.7",
