@@ -20,7 +20,7 @@
     "@excalidraw/excalidraw": "^0.15.2",
     "@fontsource-variable/public-sans": "^5.0.4",
     "@lexical/react": "^0.11.1",
-    "@supabase/supabase-js": "^2.24.0",
+    "@supabase/supabase-js": "^2.26.0",
     "@types/cheerio": "^0.22.31",
     "@types/pdf-parse": "^1.1.1",
     "bootstrap-icons": "^1.10.5",
